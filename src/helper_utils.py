@@ -445,7 +445,7 @@ def _update_latest_pointer(role_dir, run_folder, role_name):
     recording the absolute path to the most recent teacher run directory and model file.
     """
     pointer_path = os.path.join(role_dir, "latest.json")
-    model_filename = f"{role_name}_model.pt"
+    model_filename = f"{role_name}_model.pth"
     
     pointer_data = {
         "latest_run_dir": os.path.abspath(run_folder),
@@ -468,7 +468,7 @@ def save_model_and_results(
     base_dir="../runs"
 ):
     """
-    Saves model weights (.pt) and a single results.json file containing 
+    Saves model weights (.pth) and a single results.json file containing 
     merged configs, metrics, and (for students) the exact teacher model path used.
     Only updates latest.json when saving a Teacher model.
     """
@@ -482,7 +482,7 @@ def save_model_and_results(
     os.makedirs(run_folder, exist_ok=True)
 
     # 2. Save PyTorch Model Weights
-    model_filename = f"{role}_model.pt"
+    model_filename = f"{role}_model.pth"
     model_save_path = os.path.join(run_folder, model_filename)
     torch.save(model.state_dict(), model_save_path)
 
@@ -519,7 +519,7 @@ def save_model_and_results(
 def load_teacher_path(path_or_mode="latest", base_dir="../runs"):
     """
     Loads teacher path:
-    - "latest": Scans runs/teacher/ for the newest run_YYYYMMDD_HHMMSS folder containing a valid .pt file.
+    - "latest": Scans runs/teacher/ for the newest run_YYYYMMDD_HHMMSS folder containing a valid .pth file.
     - Exact Path: Validates and returns the exact path provided.
     """
     # 1. Handle missing/empty configuration
@@ -544,11 +544,11 @@ def load_teacher_path(path_or_mode="latest", base_dir="../runs"):
 
         # Pick the newest folder that actually contains a complete model file
         for folder in run_folders:
-            candidate_file = os.path.join(folder, "teacher_model.pt")
+            candidate_file = os.path.join(folder, "teacher_model.pth")
             if os.path.exists(candidate_file):
                 return os.path.abspath(candidate_file)
 
-        raise FileNotFoundError(f"[ERROR] No valid 'teacher_model.pt' found inside any run folder in '{teacher_dir}'!")
+        raise FileNotFoundError(f"[ERROR] No valid 'teacher_model.pth' found inside any run folder in '{teacher_dir}'!")
 
     # 3. EXACT MANUAL PATH MODE
     else:
