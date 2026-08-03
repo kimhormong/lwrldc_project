@@ -1,0 +1,25 @@
+models:
+  teacher_name: "densenet201"
+  student_name: "shufflenet_v2_05"
+  teacher_timm_name: "densenet201.tv_in1k"
+  student_model_size : "0.5x" # Options: "0.5x", "1.0x", "1.5x", "2.0x"
+
+hyperparameters:
+  student_batch_size: 32
+  student_lr: 0.001
+  student_eta_min: 0.000001
+
+  hint_lr : 0.001
+  hint_epochs: 1
+  distillation_epochs: 1
+  temperature: 4
+  alpha: 0.8
+
+fitnet:
+  hint_layer_name: "features.transition2"
+  guided_layer_name: "stage3"
+
+  student_channel: 96
+  teacher_channel: 256
+
+teacher_source: "../models/densenet_201_teacher.pth" # Relative path, or "latest" to use the most recent teacher model from the "runs" directory.

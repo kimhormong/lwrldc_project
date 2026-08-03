@@ -1,0 +1,10 @@
+dataset:
+  name: "paddy"
+  num_classes: 10
+  seed: 42
+  raw_data_dir: "data/raw/train_images"
+  processed_data_dir: "data/processed/paddy_resized_80_10_10"
+  image_size: 224
+  train_ratio: 0.8
+  val_ratio: 0.1
+  test_ratio: 0.1

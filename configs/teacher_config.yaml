@@ -1,0 +1,9 @@
+models:
+  teacher_name: "densenet_201"
+  teacher_timm_name: "densenet201.tv_in1k"
+
+hyperparameters:
+  teacher_batch_size: 64
+  teacher_lr: 0.001
+  teacher_eta_min: 0.00001
+  teacher_epochs: 1

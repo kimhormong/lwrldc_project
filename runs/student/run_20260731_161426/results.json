@@ -1,0 +1,71 @@
+{
+    "timestamp": "2026-07-31 16:14:26",
+    "model_file": "student_model.pt",
+    "config": {
+        "model": {
+            "models": {
+                "teacher_name": "densenet201",
+                "student_name": "shufflenet_v2_05",
+                "teacher_timm_name": "densenet201.tv_in1k",
+                "student_model_size": "0.5x"
+            },
+            "hyperparameters": {
+                "student_batch_size": 32,
+                "student_lr": 0.001,
+                "student_eta_min": 1e-06,
+                "hint_lr": 0.001,
+                "hint_epochs": 1,
+                "distillation_epochs": 1,
+                "temperature": 4,
+                "alpha": 0.8
+            },
+            "fitnet": {
+                "hint_layer_name": "features.transition2",
+                "guided_layer_name": "stage3",
+                "student_channel": 96,
+                "teacher_channel": 256
+            },
+            "teacher_source": "/Users/kimhor/Desktop/software/PLDC-Project/models/densenet_201_teacher.pth"
+        },
+        "data": {
+            "dataset": {
+                "name": "paddy",
+                "num_classes": 10,
+                "seed": 42,
+                "raw_data_dir": "data/raw/train_images",
+                "processed_data_dir": "data/processed/paddy_resized_80_10_10",
+                "image_size": 224,
+                "train_ratio": 0.8,
+                "val_ratio": 0.1,
+                "test_ratio": 0.1
+            }
+        }
+    },
+    "metrics": {
+        "train_accuracy": [
+            0.5185630321502686
+        ],
+        "train_hard_loss": [
+            1.5303627511464704
+        ],
+        "train_soft_loss": [
+            0.6931417691625971
+        ],
+        "train_distill_loss": [
+            3.4423439161545177
+        ],
+        "val_accuracy": [
+            0.6563706398010254
+        ],
+        "val_hard_loss": [
+            1.0622001343252117
+        ],
+        "val_soft_loss": [
+            0.5147756527979862
+        ],
+        "val_distill_loss": [
+            4.649305332581509
+        ],
+        "test_acc": 0.6383587786259542
+    }
+}
